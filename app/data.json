@@ -43,6 +43,14 @@
       "isOverdue": false
     }
   ],
+  "calendar": {
+    "label": "September 2026",
+    "year": 2026,
+    "monthIndex": 8,
+    "today": 2,
+    "taskDays": [3, 8, 12],
+    "opensDays": [15, 29]
+  },
   "trajectories": [
     {
       "id": 1,

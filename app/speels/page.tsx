@@ -1,5 +1,7 @@
 import {
   Bell,
+  ChevronLeft,
+  ChevronRight,
   FileStack,
   HelpCircle,
   LayoutGrid,
@@ -14,6 +16,7 @@ import data from "../data.json";
 
 const {
   auth,
+  calendar,
   stats,
   helpRequests,
   upcomingTasks,
@@ -39,15 +42,18 @@ function initials(name: string) {
 
 export default function SpeelsDashboard() {
   return (
-    <div className="relative min-h-svh overflow-hidden bg-sand p-4 md:p-8">
+    <div className="relative min-h-svh overflow-hidden bg-sand">
       {/* Vervaagde vlakken achter de app, zoals in het voorbeeld. */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -left-32 size-[34rem] rounded-full bg-pine/25 blur-3xl" />
-        <div className="absolute top-1/4 -right-40 size-[38rem] rounded-full bg-ember-soft/45 blur-3xl" />
-        <div className="absolute -bottom-56 left-1/3 size-[32rem] rounded-full bg-pine/15 blur-3xl" />
+        <div className="absolute -top-40 -left-32 size-[34rem] rounded-full bg-pine/40 blur-3xl" />
+        <div className="absolute top-1/4 -right-40 size-[38rem] rounded-full bg-ember-soft/60 blur-3xl" />
+        <div className="absolute -bottom-56 left-1/3 size-[32rem] rounded-full bg-pine/25 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex h-[calc(100svh-2rem)] max-w-[1280px] overflow-hidden rounded-[28px] bg-white/80 shadow-2xl shadow-pine/10 ring-1 ring-white/60 backdrop-blur-xl md:h-[calc(100svh-4rem)]">
+      {/* Eén doorlopende matglaslaag over de gekleurde vlakken heen. Hij is
+          bewust niet te wit: de kleuren moeten erdoorheen komen, anders
+          vallen de witte kaarten erop weg. */}
+      <div className="relative flex h-svh overflow-hidden bg-white/45 backdrop-blur-3xl">
         <aside className="flex w-[72px] shrink-0 flex-col items-center gap-2 border-r border-ink/5 py-5">
           <span className="mb-4 flex size-10 items-center justify-center rounded-2xl bg-pine text-sm font-semibold text-white">
             SZ
@@ -114,6 +120,7 @@ export default function SpeelsDashboard() {
                 {helpRequests.map((request) => (
                   <HelpCard key={request.id} {...request} />
                 ))}
+                <CalendarCard />
                 <TrajectoriesCard />
               </div>
             </div>
@@ -121,6 +128,110 @@ export default function SpeelsDashboard() {
         </div>
       </div>
     </div>
+  );
+}
+
+function CalendarCard() {
+  const { label, year, monthIndex, today, taskDays, opensDays } = calendar;
+
+  // Maandrooster dat op maandag begint, met de uitlopers van de buurmaanden.
+  const firstDay = new Date(year, monthIndex, 1);
+  const offset = (firstDay.getDay() + 6) % 7;
+  const start = new Date(year, monthIndex, 1 - offset);
+  const days = Array.from({ length: 42 }, (_, index) => {
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    return date;
+  }).slice(0, 35);
+
+  return (
+    <section className="rounded-3xl bg-white p-6 shadow-[0_4px_20px_rgba(16,27,23,0.06)]">
+      <div className="flex items-center justify-between">
+        <div className="flex rounded-full bg-sand p-1">
+          <button
+            type="button"
+            className="cursor-pointer rounded-full px-4 py-1.5 text-xs font-medium text-ink/50 transition hover:text-ink"
+          >
+            Week
+          </button>
+          <button
+            type="button"
+            className="cursor-pointer rounded-full bg-pine px-4 py-1.5 text-xs font-medium text-sand"
+          >
+            Maand
+          </button>
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            className="flex size-7 cursor-pointer items-center justify-center rounded-full text-ink/40 transition hover:bg-sand hover:text-ink"
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+          <button
+            type="button"
+            className="flex size-7 cursor-pointer items-center justify-center rounded-full text-ink/40 transition hover:bg-sand hover:text-ink"
+          >
+            <ChevronRight className="size-4" />
+          </button>
+        </div>
+      </div>
+
+      <p className="mt-4 text-center text-sm font-semibold text-ink">{label}</p>
+
+      <div className="mt-3 grid grid-cols-7 gap-y-1 text-center">
+        {["M", "D", "W", "D", "V", "Z", "Z"].map((weekday, index) => (
+          <span
+            key={`${weekday}-${index}`}
+            className="py-1 text-xs font-medium text-ink/30"
+          >
+            {weekday}
+          </span>
+        ))}
+
+        {days.map((date) => {
+          const inMonth = date.getMonth() === monthIndex;
+          const day = date.getDate();
+          const isToday = inMonth && day === today;
+          const hasTask = inMonth && taskDays.includes(day);
+          const opens = inMonth && opensDays.includes(day);
+
+          return (
+            <button
+              key={date.toISOString()}
+              type="button"
+              className="flex cursor-pointer flex-col items-center gap-1 py-1.5"
+            >
+              <span
+                className={`flex size-8 items-center justify-center rounded-full text-sm transition ${
+                  isToday
+                    ? "bg-pine font-semibold text-sand"
+                    : inMonth
+                      ? "text-ink hover:bg-sand"
+                      : "text-ink/20"
+                }`}
+              >
+                {day}
+              </span>
+              <span
+                className={`size-1.5 rounded-full ${
+                  hasTask ? "bg-ember" : opens ? "bg-ink/20" : "bg-transparent"
+                }`}
+              />
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-3 flex items-center gap-4 border-t border-ink/5 pt-3 text-xs text-ink/50">
+        <span className="flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-ember" /> deadline
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-ink/20" /> opent
+        </span>
+      </div>
+    </section>
   );
 }
 
@@ -176,7 +287,7 @@ function TilesRow() {
         <button
           key={tile.label}
           type="button"
-          className="cursor-pointer rounded-3xl bg-white p-5 text-left shadow-sm shadow-ink/5 transition hover:-translate-y-0.5 hover:shadow-md"
+          className="cursor-pointer rounded-3xl bg-white p-5 text-left shadow-[0_4px_20px_rgba(16,27,23,0.06)] transition hover:-translate-y-0.5 hover:shadow-md"
         >
           <p
             className={`text-3xl font-semibold ${
@@ -208,7 +319,7 @@ function HelpCard({
   askedAt: string;
 }) {
   return (
-    <section className="rounded-3xl bg-white p-6 shadow-sm shadow-ink/5">
+    <section className="rounded-3xl bg-white p-6 shadow-[0_4px_20px_rgba(16,27,23,0.06)]">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-ink">Vraagt om hulp</h2>
         <span className="flex size-8 items-center justify-center rounded-full bg-ember/10 text-ember">
@@ -254,7 +365,7 @@ function HelpCard({
 
 function TasksCard() {
   return (
-    <section className="rounded-3xl bg-white p-6 shadow-sm shadow-ink/5">
+    <section className="rounded-3xl bg-white p-6 shadow-[0_4px_20px_rgba(16,27,23,0.06)]">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-ink">
           Eerstvolgende taken
@@ -325,7 +436,7 @@ function TasksCard() {
 
 function TrajectoriesCard() {
   return (
-    <section className="rounded-3xl bg-white p-6 shadow-sm shadow-ink/5">
+    <section className="rounded-3xl bg-white p-6 shadow-[0_4px_20px_rgba(16,27,23,0.06)]">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-ink">Trajecten</h2>
         <button
