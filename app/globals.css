@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Zelfde kleuren als de echte app (resources/css/app.css). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-sand: #f5f2ec;
+  --color-pine: #17594a;
+  --color-pine-dark: #0f4238;
+  --color-ink: #101b17;
+  --color-ember: #ee6a45;
+  --color-ember-soft: #f7b29b;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-sidebar: #f5f2ec;
+  --color-sidebar-foreground: #101b17;
+  --color-sidebar-accent: #eae5da;
+  --color-sidebar-border: #e5dfd2;
+
+  --font-sans: var(--font-geist-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-sidebar);
+  color: var(--color-ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }

@@ -1,0 +1,91 @@
+{
+  "auth": {
+    "userName": "Jenny Breedveld",
+    "email": "supervisor@lijfkracht.test",
+    "organizationName": "LijfKracht"
+  },
+  "stats": {
+    "activeTrajectories": 3,
+    "overdueTasks": 2,
+    "dueThisWeek": 5
+  },
+  "billingAlert": null,
+  "helpRequests": [
+    {
+      "id": 1,
+      "employeeName": "Bart de Boer",
+      "taskName": "CV actualiseren",
+      "message": "ik snap het gat in mijn cv niet, wat moet ik daar invullen",
+      "askedAt": "01-09-2026"
+    }
+  ],
+  "intakeMismatches": [],
+  "upcomingTasks": [
+    {
+      "id": 1,
+      "name": "Voortgangsmoment werkgever en werknemer",
+      "employeeName": "Yusuf Demir",
+      "dueDate": "3 sep",
+      "isOverdue": true
+    },
+    {
+      "id": 2,
+      "name": "Intake werkgever",
+      "employeeName": "Sanne Mulder",
+      "dueDate": "8 sep",
+      "isOverdue": false
+    },
+    {
+      "id": 3,
+      "name": "Zoekprofiel opstellen",
+      "employeeName": "Bart de Boer",
+      "dueDate": "12 sep",
+      "isOverdue": false
+    }
+  ],
+  "trajectories": [
+    {
+      "id": 1,
+      "employeeName": "Bart de Boer",
+      "currentWeek": 8,
+      "totalWeeks": 52,
+      "status": "active",
+      "openTasks": 4,
+      "overdueTasks": 1
+    },
+    {
+      "id": 2,
+      "employeeName": "Yusuf Demir",
+      "currentWeek": 30,
+      "totalWeeks": 52,
+      "status": "active",
+      "openTasks": 3,
+      "overdueTasks": 1
+    },
+    {
+      "id": 3,
+      "employeeName": "Sanne Mulder",
+      "currentWeek": 1,
+      "totalWeeks": 52,
+      "status": "active",
+      "openTasks": 2,
+      "overdueTasks": 0
+    }
+  ],
+  "openingSoonTasks": [
+    {
+      "id": 4,
+      "name": "Trajectplan opstellen",
+      "employeeName": "Sanne Mulder",
+      "opensAt": "15 sep",
+      "opensLabel": "wacht op Intake werkgever"
+    },
+    {
+      "id": 5,
+      "name": "Eerste voortgangsrapportage",
+      "employeeName": "Yusuf Demir",
+      "opensAt": "29 sep",
+      "opensLabel": "opent op 29 sep"
+    }
+  ]
+}
