@@ -32,6 +32,25 @@ const navIcons = [
   { icon: FileStack, label: "Rapportages", active: false },
 ];
 
+function Avatar({
+  src,
+  name,
+  className = "size-10",
+}: {
+  src: string;
+  name: string;
+  className?: string;
+}) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={name}
+      className={`${className} shrink-0 rounded-full object-cover ring-2 ring-white`}
+    />
+  );
+}
+
 function initials(name: string) {
   return name
     .split(" ")
@@ -103,9 +122,7 @@ export default function SpeelsDashboard() {
               <Bell className="size-5" />
               <span className="absolute top-2 right-2.5 size-2 rounded-full bg-ember" />
             </button>
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-pine text-sm font-semibold text-white">
-              {initials(auth.userName)}
-            </span>
+            <Avatar src={auth.avatar} name={auth.userName} />
           </header>
 
           <div className="min-h-0 flex-1 overflow-y-auto p-6">
@@ -246,12 +263,12 @@ function KikiCard() {
         aria-hidden
         className="pointer-events-none absolute top-1/2 right-1/4 size-24 rounded-full bg-ember-soft/25"
       />
-      <div className="relative flex items-start gap-5">
-        <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-sand text-xl font-semibold text-pine">
-          K
-        </span>
-        <div className="min-w-0">
-          <h1 className="text-lg font-semibold">
+      <div className="relative flex items-center gap-6">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-medium tracking-wide text-sand/60 uppercase">
+            Coach Kiki
+          </p>
+          <h1 className="mt-1 text-lg font-semibold">
             Goedemiddag {auth.userName.split(" ")[0]}
           </h1>
           <p className="mt-1.5 max-w-md text-sm leading-relaxed text-sand/85">
@@ -265,6 +282,13 @@ function KikiCard() {
             Ga naar Bart
           </button>
         </div>
+
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/kiki.svg"
+          alt="Coach Kiki"
+          className="hidden h-40 w-auto shrink-0 sm:block"
+        />
       </div>
     </section>
   );
@@ -312,11 +336,13 @@ function HelpCard({
   taskName,
   message,
   askedAt,
+  avatar,
 }: {
   employeeName: string;
   taskName: string;
   message: string;
   askedAt: string;
+  avatar: string;
 }) {
   return (
     <section className="rounded-3xl bg-white p-6 shadow-[0_4px_20px_rgba(16,27,23,0.06)]">
@@ -328,9 +354,7 @@ function HelpCard({
       </div>
 
       <div className="mt-5 flex items-center gap-3">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-ember/15 text-sm font-semibold text-ember">
-          {initials(employeeName)}
-        </span>
+        <Avatar src={avatar} name={employeeName} className="size-11" />
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold text-ink">
             {employeeName}
@@ -384,9 +408,11 @@ function TasksCard() {
             key={task.id}
             className="flex items-center gap-4 rounded-2xl bg-sand/50 px-4 py-3 transition hover:bg-sand"
           >
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-xs font-semibold text-ink/60">
-              {initials(task.employeeName)}
-            </span>
+            <Avatar
+              src={task.avatar}
+              name={task.employeeName}
+              className="size-9"
+            />
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-medium text-ink">
                 {task.name}
@@ -458,13 +484,10 @@ function TrajectoriesCard() {
           return (
             <li key={trajectory.id}>
               <div className="flex items-center gap-3">
-                <span
-                  className={`flex size-10 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
-                    late ? "bg-ember/15 text-ember" : "bg-pine/10 text-pine"
-                  }`}
-                >
-                  {initials(trajectory.employeeName)}
-                </span>
+                <Avatar
+                  src={trajectory.avatar}
+                  name={trajectory.employeeName}
+                />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-ink">
                     {trajectory.employeeName}

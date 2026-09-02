@@ -2,7 +2,8 @@
   "auth": {
     "userName": "Jenny Breedveld",
     "email": "supervisor@lijfkracht.test",
-    "organizationName": "LijfKracht"
+    "organizationName": "LijfKracht",
+    "avatar": "https://i.pravatar.cc/160?img=47"
   },
   "stats": {
     "activeTrajectories": 3,
@@ -16,7 +17,8 @@
       "employeeName": "Bart de Boer",
       "taskName": "CV actualiseren",
       "message": "ik snap het gat in mijn cv niet, wat moet ik daar invullen",
-      "askedAt": "01-09-2026"
+      "askedAt": "01-09-2026",
+      "avatar": "https://i.pravatar.cc/160?img=13"
     }
   ],
   "intakeMismatches": [],
@@ -26,21 +28,24 @@
       "name": "Voortgangsmoment werkgever en werknemer",
       "employeeName": "Yusuf Demir",
       "dueDate": "3 sep",
-      "isOverdue": true
+      "isOverdue": true,
+      "avatar": "https://i.pravatar.cc/160?img=59"
     },
     {
       "id": 2,
       "name": "Intake werkgever",
       "employeeName": "Sanne Mulder",
       "dueDate": "8 sep",
-      "isOverdue": false
+      "isOverdue": false,
+      "avatar": "https://i.pravatar.cc/160?img=45"
     },
     {
       "id": 3,
       "name": "Zoekprofiel opstellen",
       "employeeName": "Bart de Boer",
       "dueDate": "12 sep",
-      "isOverdue": false
+      "isOverdue": false,
+      "avatar": "https://i.pravatar.cc/160?img=13"
     }
   ],
   "calendar": {
@@ -48,8 +53,15 @@
     "year": 2026,
     "monthIndex": 8,
     "today": 2,
-    "taskDays": [3, 8, 12],
-    "opensDays": [15, 29]
+    "taskDays": [
+      3,
+      8,
+      12
+    ],
+    "opensDays": [
+      15,
+      29
+    ]
   },
   "trajectories": [
     {
@@ -59,7 +71,8 @@
       "totalWeeks": 52,
       "status": "active",
       "openTasks": 4,
-      "overdueTasks": 1
+      "overdueTasks": 1,
+      "avatar": "https://i.pravatar.cc/160?img=13"
     },
     {
       "id": 2,
@@ -68,7 +81,8 @@
       "totalWeeks": 52,
       "status": "active",
       "openTasks": 3,
-      "overdueTasks": 1
+      "overdueTasks": 1,
+      "avatar": "https://i.pravatar.cc/160?img=59"
     },
     {
       "id": 3,
@@ -77,7 +91,8 @@
       "totalWeeks": 52,
       "status": "active",
       "openTasks": 2,
-      "overdueTasks": 0
+      "overdueTasks": 0,
+      "avatar": "https://i.pravatar.cc/160?img=45"
     }
   ],
   "openingSoonTasks": [
@@ -86,14 +101,22 @@
       "name": "Trajectplan opstellen",
       "employeeName": "Sanne Mulder",
       "opensAt": "15 sep",
-      "opensLabel": "wacht op Intake werkgever"
+      "opensLabel": "wacht op Intake werkgever",
+      "avatar": "https://i.pravatar.cc/160?img=45"
     },
     {
       "id": 5,
       "name": "Eerste voortgangsrapportage",
       "employeeName": "Yusuf Demir",
       "opensAt": "29 sep",
-      "opensLabel": "opent op 29 sep"
+      "opensLabel": "opent op 29 sep",
+      "avatar": "https://i.pravatar.cc/160?img=59"
     }
-  ]
+  ],
+  "faces": {
+    "Jenny Breedveld": "https://i.pravatar.cc/160?img=47",
+    "Bart de Boer": "https://i.pravatar.cc/160?img=13",
+    "Yusuf Demir": "https://i.pravatar.cc/160?img=59",
+    "Sanne Mulder": "https://i.pravatar.cc/160?img=45"
+  }
 }
