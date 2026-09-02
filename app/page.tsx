@@ -6,6 +6,7 @@ import {
   Lock,
   Users,
 } from "lucide-react";
+import { AppShell } from "./app-shell";
 import data from "./data.json";
 
 const {
@@ -46,7 +47,8 @@ const statCards = [
 
 export default function Dashboard() {
   return (
-    <div className="flex h-full flex-1 flex-col gap-6 p-4 lg:p-6">
+    <AppShell>
+      <div className="flex h-full flex-1 flex-col gap-6 p-4 lg:p-6">
       {billingAlert !== null && (
         <div className="flex items-center gap-4 rounded-2xl border border-ember/30 bg-ember/5 px-6 py-4">
           <p className="flex-1 text-sm font-medium text-ink">{billingAlert}</p>
@@ -278,6 +280,7 @@ export default function Dashboard() {
           </ul>
         )}
       </div>
-    </div>
+      </div>
+    </AppShell>
   );
 }
